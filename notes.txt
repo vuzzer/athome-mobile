@@ -1,0 +1,2 @@
+- update package google te fb
+- crétaion fichier de routes (ok)
