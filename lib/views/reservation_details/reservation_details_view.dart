@@ -1,7 +1,5 @@
-import 'package:book_medial_mobile/utils/AppWidget.dart';
 import 'package:book_medial_mobile/utils/my_custom_app_bar.dart';
 import 'package:book_medial_mobile/views/free_properties/components/free_property_card.dart';
-import 'package:book_medial_mobile/views/home/components/searchBar.dart';
 import 'package:flutter/material.dart';
 
 class ReservationDetailsView extends StatefulWidget {
@@ -287,7 +285,8 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                                       ),
                                       // Champ
                                       Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 10),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.all(

@@ -1,14 +1,9 @@
-import 'package:book_medial_mobile/api/providers/select_page.dart';
-import 'package:book_medial_mobile/utils/AppColors.dart';
-import 'package:book_medial_mobile/utils/AppConstant.dart';
 import 'package:book_medial_mobile/utils/my_custom_app_bar.dart';
 import 'package:book_medial_mobile/views/free_properties/components/free_property_card.dart';
 import 'package:book_medial_mobile/views/home/components/searchBar.dart';
-import 'package:book_medial_mobile/views/home/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 class FreePropertiesView extends StatefulWidget {
   FreePropertiesView({Key key}) : super(key: key);
@@ -17,72 +12,8 @@ class FreePropertiesView extends StatefulWidget {
   _FreePropertiesViewState createState() => _FreePropertiesViewState();
 }
 
-class _FreePropertiesViewState extends State<FreePropertiesView> {
-  final _inactiveColor = Colors.black12;
-  List<BottomNavyBarItem> _builBarItem() {
-    return <BottomNavyBarItem>[
-      BottomNavyBarItem(
-        iconIsActive: Icon(Icons.home),
-        icon: Icon(Icons.home_outlined),
-        title: Text(
-          '.',
-          style: TextStyle(
-              fontFamily: fontMontserrat,
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
-        ),
-        activeColor: primaryColor,
-        inactiveColor: _inactiveColor,
-        textAlign: TextAlign.center,
-      ),
-      BottomNavyBarItem(
-        iconIsActive: Icon(Icons.notifications),
-        icon: Icon(Icons.notifications_none_outlined),
-        title: Text(
-          '.',
-          style: TextStyle(
-              fontFamily: fontMontserrat,
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
-        ),
-        activeColor: primaryColor,
-        inactiveColor: _inactiveColor,
-        textAlign: TextAlign.center,
-      ),
-      BottomNavyBarItem(
-        iconIsActive: Icon(Icons.person),
-        icon: Icon(
-          Icons.person_outline,
-        ),
-        title: Text(
-          '.',
-          style: TextStyle(
-              fontFamily: fontMontserrat,
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
-        ),
-        activeColor: primaryColor,
-        inactiveColor: _inactiveColor,
-        textAlign: TextAlign.center,
-      )
-    ];
-  }
-
-  Widget _buildBottomNavigation(context) {
-    var selectPageProvider =
-        Provider.of<SelectPageProvider>(context, listen: false);
-    return CustomAnimatedBottomBar(
-        containerHeight: 70,
-        backgroundColor: Colors.white,
-        selectedIndex: selectPageProvider.selectPage,
-        showElevation: true,
-        itemCornerRadius: 24,
-        curve: Curves.easeIn,
-        onItemSelected: (index) =>
-            setState(() => selectPageProvider.changePage(index)),
-        items: _builBarItem());
-  }
-
+class _FreePropertiesViewState extends State<FreePropertiesView> { 
+  
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

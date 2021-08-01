@@ -42,7 +42,7 @@ Widget buildCardThird(
           children: <Widget>[
             //Text inside message
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 40),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

@@ -8,9 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   User user = User();
-  // SharedPreferences.setMockInitialValues({});
   SharedPreferences _prefs;
-  // bool _isConnected = false;
+  String token;
 
   Future<bool> authenticate(String email, String password) async {
     Map data = {'email': email, 'password': password};
@@ -68,26 +67,20 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String> getUserStatus() async {
     _prefs = await SharedPreferences.getInstance();
-    // _prefs = await SharedPreferences.getInstance();
 
-    if (_prefs.getBool("token") == null) {
-      //première ouverture de l'app
-      // _prefs.setBool("token", false);
+    if (_prefs.getBool("isConnected") == null) {
       return 'page_slides';
     } else {
+      if (_prefs.getString('token') != null) {
+        this.token = _prefs.getString('token');
+      }
       return 'page_home';
-      // if (!_prefs.getBool("token")) {
-      //   //jamais essayé de s'authentifier
-      // } else {
-      //     return 'page_home';
-      // }
     }
   }
 
-  bool get isConnected => _prefs.getBool("token") ;
+  bool get isConnected => _prefs.getBool("isConnected");
 
   void getToken() async {
-    // _isConnected = _prefs.getBool("token");
     notifyListeners();
   }
 
@@ -99,33 +92,23 @@ class AuthProvider extends ChangeNotifier {
     if (user.email == null) {
       user.email = _prefs.getString("userEmail");
     }
-
-    // if (user.email == null) {
-    //   user.email = _prefs.getString("userEmail");
-    // }
-    // if (user.lastName == null) {
-    //   user.lastName = _prefs.getString("userLastname");
-    // }
   }
 
   Future<void> unsetSession() async {
     _prefs = await SharedPreferences.getInstance();
-    // String token = "BearisConnected = false;
-    // await http.get(
-    //   Uri.parse(Constants.LOGOUT_URL),
-    //   headers: {"Authorization": token},
-    // );
     _prefs.clear();
-    _prefs.setBool('token', false);
+    _prefs.setBool('isConnected', false);
+    this.user = User();
+    notifyListeners();
   }
 
   setSession(User user, String token) async {
     _prefs = await SharedPreferences.getInstance();
-    _prefs.setBool('token', true);
+    _prefs.setBool('isConnected', true);
     getToken();
     _prefs.setString('userEmail', user.email);
     _prefs.setString('userName', user.name);
-    // _prefs.setString('userFirstname', user.firstName);
+    _prefs.setString('token', token);
   }
 
   //fin

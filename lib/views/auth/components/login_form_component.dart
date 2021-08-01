@@ -18,9 +18,9 @@ class _FormComponentState extends State<FormComponent> {
       isErrorPwdTextField = false;
 
   final TextEditingController loginTextController =
-      TextEditingController(text: "jojo@admin.ci");
+      TextEditingController(text: "");
   final TextEditingController pwdTextController =
-      TextEditingController(text: "12345678");
+      TextEditingController(text: "");
 
   @override
   void dispose() {
@@ -298,8 +298,6 @@ class _FormComponentState extends State<FormComponent> {
       authProvider
           .authenticate(loginTextController.text, pwdTextController.text)
           .then((bool result) {
-        print("result : $result");
-
         setState(() {
           isAttemptLogin = false;
         });

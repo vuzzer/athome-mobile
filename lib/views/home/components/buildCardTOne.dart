@@ -42,7 +42,7 @@ Widget buildCardOne(
           children: <Widget>[
             //Text inside message
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               child: Row(
                 children: [
                   Icon(

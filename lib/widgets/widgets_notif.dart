@@ -1,6 +1,5 @@
 import 'package:book_medial_mobile/utils/AppColors.dart';
 import 'package:flutter/material.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class WidgetNotif extends StatefulWidget {
   //final TabController _tabController;

@@ -1,8 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart'; 
 
 class Constants {
   Constants._();
@@ -72,7 +71,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // Retour button
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -82,7 +81,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                       ),
                     ),
                     // OK button
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         SystemChannels.platform
                             .invokeMethod('SystemNavigator.pop');
@@ -163,7 +162,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },
@@ -174,7 +173,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },

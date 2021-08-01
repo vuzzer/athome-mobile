@@ -23,3 +23,10 @@ void showSnackbar(BuildContext context, String message, {milliseconds = 3000}) {
   // and use it to show a SnackBar.
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
+
+String truncateText(String text, int maxLength) {
+  return text.length < maxLength
+      ? text
+      : "${text.substring(0, (maxLength - 1))}...";
+}
+

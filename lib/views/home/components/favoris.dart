@@ -36,17 +36,17 @@ Widget favoris(context) {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child:
-                  hotelCard(context, urlImage, "Luxary Hotel", "Caroline", 3),
+                  hotelCard(context, urlImage, "Luxary Hotel",  3),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child:
-                  hotelCard(context, urlImage, "Luxary Hotel", "Caroline", 3),
+                  hotelCard(context, urlImage, "Luxary Hotel",  3),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child:
-                  hotelCard(context, urlImage, "Luxary Hotel", "Caroline", 3),
+                  hotelCard(context, urlImage, "Luxary Hotel",  3),
             )
           ],
         )

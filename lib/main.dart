@@ -1,4 +1,5 @@
 import 'package:book_medial_mobile/api/providers/auth_provider.dart';
+import 'package:book_medial_mobile/api/providers/property_provider.dart';
 import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
 import 'package:book_medial_mobile/api/providers/select_page.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
           }),
           ChangeNotifierProvider(create: (context) {
             return SelectPageProvider();
+          }),
+          ChangeNotifierProvider(create: (context) {
+            return PropertyProvider();
           }),
           ChangeNotifierProvider(create: (context) {
             return ProximityProvider();

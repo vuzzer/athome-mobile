@@ -1,9 +1,7 @@
 import 'package:book_medial_mobile/utils/AppColors.dart';
 import 'package:book_medial_mobile/utils/AppConstant.dart';
 import 'package:book_medial_mobile/utils/constants.dart';
-import 'package:book_medial_mobile/views/home/components/buildCardTOne.dart';
 import 'package:book_medial_mobile/views/home/components/gradient.dart';
-import 'package:book_medial_mobile/views/home/components/hotelCard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

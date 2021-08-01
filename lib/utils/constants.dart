@@ -2,6 +2,9 @@ class Constants {
   static const String API_URL = "https://api-bookmedial.rikudo.ci/api";
   static const String LOGIN_URL = "$API_URL/login";
   static const String REGISTER_URL = "$API_URL/register";
+  static const String PROPERTIES_URL = "$API_URL/properties";
+  static const String POPULAR_PROPERTIES_URL = "$API_URL/properties/popular";
+  static const String SHOW_PROPERTY_URL = "$API_URL/property";
 }
 
 class Menu {

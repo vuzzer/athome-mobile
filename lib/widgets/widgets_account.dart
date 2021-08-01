@@ -1,6 +1,7 @@
 import 'package:book_medial_mobile/api/providers/auth_provider.dart';
 import 'package:book_medial_mobile/api/providers/select_page.dart';
 import 'package:book_medial_mobile/utils/my_custom_app_bar.dart';
+import 'package:book_medial_mobile/views/home/page_home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,7 +20,11 @@ class AccountView extends StatelessWidget {
     authProvider.setUserProfileInfo();
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamed(context, "/page_home");
+        // Navigator.pushNamed(context, "/page_home");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
 
         return true;
       },
@@ -28,12 +33,16 @@ class AccountView extends StatelessWidget {
             [
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, "/page_home");
+                  // Navigator.pushNamed(context, "/page_home");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
                 },
                 child: Icon(FontAwesomeIcons.longArrowAltLeft),
               ),
               SizedBox(
-                width: screenSize.width * 0.3,
+                width: 20,
               ),
               Row(
                 children: [
@@ -131,13 +140,29 @@ class AccountView extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                       fontFamily: "Montserrat"),
                                 ),
-                                Text(
-                                  authProvider.user.name ?? 'Invité',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: "Montserrat"),
+                                Consumer<AuthProvider>(
+                                  builder: (context, AuthProvider authProvider,
+                                      Widget child) {
+                                    return authProvider.isConnected
+                                        ? Text(
+                                            authProvider.user.name,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: "Montserrat",
+                                            ),
+                                          )
+                                        : Text(
+                                            'Invité',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: "Montserrat",
+                                            ),
+                                          );
+                                  },
                                 ),
                               ],
                             ),
@@ -217,24 +242,39 @@ class AccountView extends StatelessWidget {
                   ),
                   SizedBox(height: screenSize.height * 0.095),
                   //Se déconnecter
-                  GestureDetector(
-                    onTap: () {
-                      authProvider.unsetSession();
-                      Navigator.pushReplacementNamed(context, "/page_home");
+                  Consumer<AuthProvider>(
+                    builder:
+                        (context, AuthProvider authProvider, Widget child) {
+                      return authProvider.isConnected
+                          ? GestureDetector(
+                              onTap: () { 
+                                authProvider.unsetSession();
+                                var selectPageProvider =
+                                    Provider.of<SelectPageProvider>(context,
+                                        listen: false);
+                                selectPageProvider.changePage(0);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()),
+                                );
+                              },
+                              child: Container(
+                                width: 150,
+                                height: 150,
+                                child: Text(
+                                  'Se déconnecter',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Montserrat",
+                                    color: Color(0xFFF46500),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : SizedBox();
                     },
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      child: Text(
-                        'Se déconnecter',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Montserrat",
-                          color: Color(0xFFF46500),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),

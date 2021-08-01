@@ -1,4 +1,5 @@
 import 'package:book_medial_mobile/api/providers/auth_provider.dart';
+import 'package:book_medial_mobile/api/providers/property_provider.dart';
 import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
 import 'package:book_medial_mobile/utils/AppColors.dart';
 import 'package:book_medial_mobile/utils/AppConstant.dart';
@@ -8,7 +9,6 @@ import 'package:book_medial_mobile/views/free_properties/properties.dart';
 import 'package:book_medial_mobile/views/home/components/buildCardTOne.dart';
 import 'package:book_medial_mobile/views/home/components/buildCardThird.dart';
 import 'package:book_medial_mobile/views/home/components/buildCardTwo.dart';
-import 'package:book_medial_mobile/views/hotel_detail/hotel_detail.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:book_medial_mobile/views/home/components/hotelCard.dart';
@@ -41,6 +41,9 @@ class WidgetHome extends StatelessWidget {
   Widget build(BuildContext context) {
     var authprovider = Provider.of<AuthProvider>(context, listen: false);
     var proximities = Provider.of<ProximityProvider>(context);
+    var propertyProvider =
+        Provider.of<PropertyProvider>(context, listen: false);
+    propertyProvider.getPopularProperties();
     Size screenSize = MediaQuery.of(context).size;
     Widget withoutProximity = ListView(
       children: <Widget>[
@@ -87,26 +90,44 @@ class WidgetHome extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height / 4.5,
             width: MediaQuery.of(context).size.width,
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: hotelCard(context, menu[2].urlImage, "Abidjan 13",
-                      "Côte d'Ivoire", 4),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: hotelCard(
-                      context, menu[0].urlImage, "Gagnoa", "Côte d'Ivoire", 5),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: hotelCard(context, menu[1].urlImage, "Yamoussoukro",
-                      "Côte d'Ivoire", 2),
-                )
-              ],
+            child: Consumer<PropertyProvider>(
+              builder:
+                  (context, PropertyProvider propertyProvider, Widget child) {
+                return propertyProvider.popularPropertyList.isNotEmpty
+                    ? ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: propertyProvider.popularPropertyList
+                            .map((popularProperty) {
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: hotelCard(
+                              context,
+                              menu[0].urlImage,
+                              "$popularProperty",
+                              4,
+                            ),
+                          );
+                        }).toList(),
+                      )
+                    : Center(
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              // color: Color(0xFFF46500),
+                              ),
+                          child: CircularProgressIndicator(
+                            // backgroundColor: Colors.green,
+                            strokeWidth: 5,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Color(0xFFF46500),
+                            ),
+                          ),
+                        ),
+                      );
+              },
             ),
           ),
 
@@ -144,29 +165,41 @@ class WidgetHome extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height / 4.5,
             width: MediaQuery.of(context).size.width,
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: hotelCard(
-                      context, menu[0].urlImage, "Abidjan", "Côte d'Ivoire", 4,
-                      width: screenSize.width * .7),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: hotelCard(
-                      context, menu[1].urlImage, "Gagnoa", "Côte d'Ivoire", 5,
-                      width: screenSize.width * .7),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: hotelCard(context, menu[2].urlImage, "Yamoussoukro",
-                      "Côte d'Ivoire", 2,
-                      width: screenSize.width * .7),
-                )
-              ],
+            child: Consumer<PropertyProvider>(
+              builder:
+                  (context, PropertyProvider propertyProvider, Widget child) {
+                return propertyProvider.popularPropertyList.isNotEmpty
+                    ? ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: propertyProvider.popularPropertyList
+                            .map((popularProperty) {
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: hotelCard(context, menu[0].urlImage,
+                                "$popularProperty", 4,
+                                width: screenSize.width * .7),
+                          );
+                        }).toList(),
+                      )
+                    : Center(
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              // color: Color(0xFFF46500),
+                              ),
+                          child: CircularProgressIndicator(
+                            // backgroundColor: Colors.green,
+                            strokeWidth: 5,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Color(0xFFF46500),
+                            ),
+                          ),
+                        ),
+                      );
+              },
             ),
           ),
 
@@ -294,17 +327,13 @@ class WidgetHome extends StatelessWidget {
                   fit: BoxFit.contain,
                   color: Colors.black.withOpacity(0.8),
                 ),
-                // Icon(
-                // FontAwesomeIcons.portrait,
-                //   size: 60,
-                // ),
               ),
           ],
           preferredHeight: 80,
         ),
         body: Container(
             padding: EdgeInsets.only(
-              left: 10,
+              left: 0,
             ),
             decoration: BoxDecoration(
               color: Colors.white,

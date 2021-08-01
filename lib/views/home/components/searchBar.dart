@@ -245,10 +245,10 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
           )
         : Container(
             margin: EdgeInsets.only(
-                left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
+                left:0, right: 0, top: 10.0, bottom: 10.0),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             width: width,
-            height: height * .07,
+            height: height * .12,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(
@@ -288,7 +288,7 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
                           ),
                         ),
                         Text(
-                          "$startDate - $endDate  $chambre",
+                          "$startDate - $endDate  \n$chambre",
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: "Montserrat",

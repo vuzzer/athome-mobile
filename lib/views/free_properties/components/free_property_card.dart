@@ -1,8 +1,21 @@
+import 'package:book_medial_mobile/utils/functions.dart';
 import 'package:flutter/material.dart';
 
 class FreePropertyCardComponent extends StatelessWidget {
   final bool isShowButton;
-  const FreePropertyCardComponent({Key key, this.isShowButton = true}) : super(key: key);
+  final String name;
+  final List facilities, beds;
+  final int dayPrice, nightPrice;
+
+  const FreePropertyCardComponent(
+      {Key key,
+      this.isShowButton = true,
+      this.name,
+      this.facilities,
+      this.beds,
+      this.dayPrice,
+      this.nightPrice})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +38,8 @@ class FreePropertyCardComponent extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          margin: EdgeInsets.symmetric(vertical: 10),
+
           child: Column(
             children: [
               /////////Nom de la propriété
@@ -34,7 +49,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Sexy Room',
+                      '${this.name}',
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontWeight: FontWeight.w800,
@@ -66,10 +81,15 @@ class FreePropertyCardComponent extends StatelessWidget {
                           color: Colors.green,
                         ),
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         Text(
-                          'Climatisation - ventilation - Wifi - Bar - Piscine',
+                          truncateText(
+                            this.facilities.length > 0
+                                ? this.facilities.join(" - ")
+                                : "null",
+                            36,
+                          ),
                           style: TextStyle(
                             color: Color(0xFFFBBB00),
                             fontFamily: "Montserrat",
@@ -85,10 +105,15 @@ class FreePropertyCardComponent extends StatelessWidget {
                       children: [
                         Icon(Icons.king_bed_sharp),
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         Text(
-                          'Lit simple / Largeur 90-130',
+                          truncateText(
+                            this.beds.length > 0
+                                ? this.beds.join(" - ")
+                                : "null",
+                            36,
+                          ),
                           style: TextStyle(
                             color: Color(0xFFFBBB00),
                             fontFamily: "Montserrat",
@@ -104,7 +129,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                       children: [
                         Icon(Icons.group),
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         Text(
                           '02 personnes',
@@ -143,18 +168,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          '18000 Fcfa',
-                          style: TextStyle(
-                              color: Color(0xFFFBBB00),
-                              fontFamily: "Montserrat",
-                              fontWeight: FontWeight.w700,
-                              decoration: TextDecoration.lineThrough),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          '12000 Fcfa',
+                          '${this.nightPrice} Fcfa',
                           style: TextStyle(
                             color: Color(0xFFFBBB00),
                             fontFamily: "Montserrat",
@@ -173,13 +187,10 @@ class FreePropertyCardComponent extends StatelessWidget {
                               fontFamily: "Montserrat"),
                         ),
                         SizedBox(
-                          height: 25,
-                        ),
-                        SizedBox(
                           height: 5,
                         ),
                         Text(
-                          '5000 Fcfa',
+                          '${this.dayPrice} Fcfa',
                           style: TextStyle(
                             color: Color(0xFFFBBB00),
                             fontFamily: "Montserrat",
@@ -195,56 +206,59 @@ class FreePropertyCardComponent extends StatelessWidget {
                 height: 20,
               ),
               /////Bouton Je réserve
-              this.isShowButton ? Container(
-                constraints: BoxConstraints(
-                  minWidth: screenSize.width,
-                  minHeight: 50.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xFFF46500),
-                  borderRadius: BorderRadius.all(
-                    Radius.elliptical(10, 10),
-                  ),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/page_reservation_details');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(10, 10),
-                      ),
-                    ),
-                    padding: EdgeInsets.all(0.0),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF46500),
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(10, 10),
-                      ),
-                    ),
-                    child: Container(
+              this.isShowButton
+                  ? Container(
                       constraints: BoxConstraints(
                         minWidth: screenSize.width,
                         minHeight: 50.0,
                       ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Je réserve",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w700,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF46500),
+                        borderRadius: BorderRadius.all(
+                          Radius.elliptical(10, 10),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ) : SizedBox(),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, '/page_reservation_details');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.elliptical(10, 10),
+                            ),
+                          ),
+                          padding: EdgeInsets.all(0.0),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF46500),
+                            borderRadius: BorderRadius.all(
+                              Radius.elliptical(10, 10),
+                            ),
+                          ),
+                          child: Container(
+                            constraints: BoxConstraints(
+                              minWidth: screenSize.width,
+                              minHeight: 50.0,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Je réserve",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(), 
             ],
           ),
         ),

@@ -1,9 +1,8 @@
-import 'package:book_medial_mobile/views/hotel_detail/hotel_detail.dart';
 import 'package:flutter/material.dart';
 
 Widget hotelCard(
-    context, String imgUrl, String hotelName, String location, int rating,
-    {double width = 200}) {
+    context, String imgUrl, String hotelName, int rating,
+    {double width = 200, String location}) {
   return Card(
     margin: EdgeInsets.only(right: 22.0),
     clipBehavior: Clip.antiAlias,
@@ -57,14 +56,14 @@ Widget hotelCard(
                     SizedBox(
                       height: 3.0,
                     ),
-                    Text(
-                      location,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    // Text(
+                    //   location,
+                    //   style: TextStyle(
+                    //     color: Colors.white,
+                    //     fontSize: 20.0,
+                    //     fontWeight: FontWeight.w600,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
