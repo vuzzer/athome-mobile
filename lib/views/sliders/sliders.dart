@@ -1,9 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:book_medial_mobile/api/providers/select_page.dart';
 import 'package:book_medial_mobile/views/sliders/components/slider_1.dart';
 import 'package:book_medial_mobile/views/sliders/components/slider_2.dart';
 import 'package:book_medial_mobile/views/sliders/components/slider_3.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SlidersView extends StatefulWidget {
@@ -18,6 +20,7 @@ class _SlidersViewState extends State<SlidersView> {
   @override
   Widget build(BuildContext context) {
     screenSize = MediaQuery.of(context).size;
+    var sliderprovider = Provider.of<SliderProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -45,7 +48,7 @@ class _SlidersViewState extends State<SlidersView> {
                 Container(
                   height: screenSize.height * 0.55,
                   child: PageView(
-                    controller: controller,
+                    controller: sliderprovider.selectSlider,
                     children: [
                       Slider1Component(),
                       Slider2Component(),
@@ -72,14 +75,14 @@ class _SlidersViewState extends State<SlidersView> {
                 //Indicators
                 Container(
                   child: SmoothPageIndicator(
-                    controller: controller,
+                    controller: sliderprovider.selectSlider,
                     count: 3,
                     effect: ExpandingDotsEffect(
                       expansionFactor: 2,
                       dotColor: Color(0xFFF46500).withOpacity(0.5),
                       activeDotColor: Color(0xFFF46500),
                       dotWidth: 20,
-                      dotHeight: 12,
+                      dotHeight: 5,
                     ),
                   ),
                 ),

@@ -1,10 +1,13 @@
+import 'package:book_medial_mobile/api/providers/select_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Slider1Component extends StatelessWidget {
   const Slider1Component({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var sliderprovider = Provider.of<SliderProvider>(context);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
@@ -46,12 +49,17 @@ class Slider1Component extends StatelessWidget {
                 horizontal: 40,
               ),
               margin: EdgeInsets.symmetric(vertical: 20),
-              child: Text('Suivant',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w700,
-                  )),
+              child: GestureDetector(
+                  onTap: () {
+                    print('hello');
+                    sliderprovider.changeSlider(1);
+                  },
+                  child: Text('Suivant',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w700,
+                      ))),
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 10),

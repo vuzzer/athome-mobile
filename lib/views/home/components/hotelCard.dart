@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-Widget hotelCard(
-    context, String imgUrl, String hotelName, int rating,
+Widget hotelCard(context, String imgUrl, String hotelName, int rating,
     {double width = 200, String location}) {
   return Card(
-    margin: EdgeInsets.only(right: 22.0),
+    margin: EdgeInsets.only(right: 10.0),
     clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),

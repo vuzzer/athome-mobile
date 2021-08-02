@@ -39,7 +39,6 @@ class FreePropertyCardComponent extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           margin: EdgeInsets.symmetric(vertical: 10),
-
           child: Column(
             children: [
               /////////Nom de la propriété
@@ -258,7 +257,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                         ),
                       ),
                     )
-                  : SizedBox(), 
+                  : SizedBox(),
             ],
           ),
         ),

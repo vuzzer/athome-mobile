@@ -74,7 +74,7 @@ class AuthProvider extends ChangeNotifier {
       if (_prefs.getString('token') != null) {
         this.token = _prefs.getString('token');
       }
-      return 'page_home';
+      return 'page_login';
     }
   }
 

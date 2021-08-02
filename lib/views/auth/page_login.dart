@@ -41,7 +41,6 @@ class _LoginViewState extends State<LoginView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 GestureDetector(

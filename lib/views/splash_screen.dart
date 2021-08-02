@@ -38,7 +38,7 @@ class _MySplashScreenState extends State<MySplashScreen>
           Navigator.pushReplacementNamed(context, "/$navigation");
         });
       }
-      if (navigation == "page_home") {
+      if (navigation == "page_login") {
         Timer(Duration(milliseconds: 3600), () {
           Navigator.pushReplacementNamed(context, "/$navigation");
         });
@@ -89,7 +89,7 @@ class _MySplashScreenState extends State<MySplashScreen>
           style: TextStyle(
             color: Color(0xFFF46500),
             fontSize: 40,
-            fontFamily: "Montserrat", 
+            fontFamily: "Montserrat",
             fontWeight: FontWeight.w800,
           ),
         )

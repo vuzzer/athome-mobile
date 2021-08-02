@@ -51,8 +51,6 @@ class WidgetHome extends StatelessWidget {
         // searchBar(MediaQuery.of(context).size.width),
         SearchBarComponent(),
 
-        //User click on proximity we have special card.
-
         /////////////////////////////////////////Recherches récentes
         if (authprovider.isConnected)
           Padding(
@@ -101,7 +99,7 @@ class WidgetHome extends StatelessWidget {
                             .map((popularProperty) {
                           return Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                                const EdgeInsets.symmetric(horizontal: 1.0),
                             child: hotelCard(
                               context,
                               menu[0].urlImage,
@@ -176,7 +174,7 @@ class WidgetHome extends StatelessWidget {
                             .map((popularProperty) {
                           return Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                                const EdgeInsets.symmetric(horizontal: 1.0),
                             child: hotelCard(context, menu[0].urlImage,
                                 "$popularProperty", 4,
                                 width: screenSize.width * .7),

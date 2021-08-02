@@ -1,10 +1,13 @@
+import 'package:book_medial_mobile/api/providers/select_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Slider2Component extends StatelessWidget {
   const Slider2Component({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var sliderprovider = Provider.of<SliderProvider>(context);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
@@ -30,31 +33,35 @@ class Slider2Component extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.8),
-                borderRadius: BorderRadius.all(
-                  Radius.elliptical(10, 10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.8),
+                  borderRadius: BorderRadius.all(
+                    Radius.elliptical(10, 10),
+                  ),
+                  border: Border.all(
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                    width: 2.5,
+                  ),
                 ),
-                border: Border.all(
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-                  width: 2.5,
+                padding: EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 40,
                 ),
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 40,
-              ),
-              margin: EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                'Suivant',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: "Montserrat",
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
+                margin: EdgeInsets.symmetric(vertical: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    sliderprovider.changeSlider(2);
+                  },
+                  child: Text(
+                    'Suivant',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                )),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
