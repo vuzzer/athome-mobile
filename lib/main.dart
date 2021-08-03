@@ -27,6 +27,9 @@ class MyApp extends StatelessWidget {
           }),
           ChangeNotifierProvider(create: (context) {
             return ProximityProvider();
+          }),
+          ChangeNotifierProvider(create: (context) {
+            return SliderProvider();
           })
         ],
         child: MaterialApp(

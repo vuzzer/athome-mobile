@@ -14,17 +14,19 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> authenticate(String email, String password) async {
     Map data = {'email': email, 'password': password};
     bool _result = false;
+    _prefs.setBool("appAlreadyOpened", true);
 
-    var responseAPI = await http.post(Uri.parse(Constants.LOGIN_URL),
-        headers: {
-          "Accept": "application/json",
-        },
-        body: data,
-        encoding: Encoding.getByName('utf-8'));
+    var responseAPI = await http.post(
+      Uri.parse(Constants.LOGIN_URL),
+      headers: {
+        "Accept": "application/json",
+      },
+      body: data,
+      encoding: Encoding.getByName('utf-8'),
+    );
 
     if (responseAPI.statusCode == 200) {
       var data = json.decode(responseAPI.body);
-      print(data);
       user = User.fromJson(data["user"]);
       setSession(user, data['access_token'].toString());
 
@@ -71,10 +73,13 @@ class AuthProvider extends ChangeNotifier {
     if (_prefs.getBool("isConnected") == null) {
       return 'page_slides';
     } else {
-      if (_prefs.getString('token') != null) {
-        this.token = _prefs.getString('token');
+      if (_prefs.getBool("appAlreadyOpened") != null) {
+        if (_prefs.getString('token') != null) {
+          this.token = _prefs.getString('token');
+        }
+        return 'page_home';
       }
-      return 'page_home';
+      return 'page_login';
     }
   }
 

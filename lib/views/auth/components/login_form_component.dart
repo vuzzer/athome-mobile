@@ -18,9 +18,9 @@ class _FormComponentState extends State<FormComponent> {
       isErrorPwdTextField = false;
 
   final TextEditingController loginTextController =
-      TextEditingController(text: "");
+      TextEditingController(text: "jojo@admin.ci");
   final TextEditingController pwdTextController =
-      TextEditingController(text: "");
+      TextEditingController(text: "12345678");
 
   @override
   void dispose() {
@@ -292,9 +292,7 @@ class _FormComponentState extends State<FormComponent> {
       AuthProvider authProvider =
           Provider.of<AuthProvider>(context, listen: false);
 
-      //Make with love, by JonathanDieke
-      print(loginTextController.text);
-      print(pwdTextController.text);
+      //Make with love, by JonathanDieke 
       authProvider
           .authenticate(loginTextController.text, pwdTextController.text)
           .then((bool result) {

@@ -21,20 +21,20 @@ class RegisterFormComponentState extends State<RegisterFormComponent> {
       isObscureConfirmPswd = true,
       isAgree = false;
 
-  TextEditingController nameTextController = TextEditingController(text: 'a');
+  TextEditingController nameTextController = TextEditingController(text: '');
   TextEditingController userNameTextController =
-      TextEditingController(text: 'a');
-  TextEditingController emailTextController = TextEditingController(text: 'a');
-  TextEditingController pwdTextController = TextEditingController(text: 'a');
+      TextEditingController(text: '');
+  TextEditingController emailTextController = TextEditingController(text: '');
+  TextEditingController pwdTextController = TextEditingController(text: '');
   TextEditingController confirmPwdTextController =
-      TextEditingController(text: 'b');
+      TextEditingController(text: '');
 
   String _groupValueRadioButton = "client";
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return Column( 
+    return Column(
       children: [
         //Choix entité
         Column(

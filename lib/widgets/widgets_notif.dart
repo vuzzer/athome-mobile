@@ -1,4 +1,5 @@
 import 'package:book_medial_mobile/utils/AppColors.dart';
+import 'package:book_medial_mobile/utils/AppConstant.dart';
 import 'package:flutter/material.dart';
 
 class WidgetNotif extends StatefulWidget {
@@ -26,15 +27,38 @@ class WidgetNotifState extends State<WidgetNotif>
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
-              children: [Icon(Icons.menu), Text('Reservation')]),
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Icon(
+                      Icons.menu,
+                      color: primaryColor,
+                    )),
+                Text(
+                  'Reservation',
+                  style: TextStyle(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      fontFamily: fontMontserrat,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12.0),
+                )
+              ]),
         ),
         Tab(
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.favorite_border_outlined),
-                Text('Favoris')
+                Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Icon(Icons.favorite_border_outlined,
+                        color: primaryColor)),
+                Text('Favoris',
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                        fontFamily: fontMontserrat,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.0))
               ]),
         ),
       ],
@@ -48,7 +72,7 @@ class WidgetNotifState extends State<WidgetNotif>
     return Scaffold(
         appBar: AppBar(
           bottom: tabBar(),
-          backgroundColor: primaryColor,
+          backgroundColor: Color.fromRGBO(255, 252, 226, 1),
         ),
         body: TabBarView(
           children: <Widget>[
@@ -60,9 +84,15 @@ class WidgetNotifState extends State<WidgetNotif>
                     Icon(
                       Icons.not_interested,
                       size: iconSize,
+                      color: Colors.black12,
                     ),
                     Text(
                       "Aucune reservation",
+                      style: TextStyle(
+                          color: Color.fromRGBO(196, 196, 196, 1),
+                          fontFamily: fontMontserrat,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18.0),
                     )
                   ],
                 ),
@@ -75,8 +105,16 @@ class WidgetNotifState extends State<WidgetNotif>
                   Icon(
                     Icons.not_interested,
                     size: iconSize,
+                    color: Colors.black12,
                   ),
-                  Text("Aucun favoris")
+                  Text(
+                    "Aucun favoris",
+                    style: TextStyle(
+                        color: Color.fromRGBO(196, 196, 196, 1),
+                        fontFamily: fontMontserrat,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.0),
+                  )
                 ],
               ),
               padding: const EdgeInsets.only(top: 150),

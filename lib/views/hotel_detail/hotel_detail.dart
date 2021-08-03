@@ -348,7 +348,8 @@ class _HotelDetailPageState extends State<HotelDetailPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => Scaffold(
+          body: Container(
         color: Theme.of(context).canvasColor,
         child: Stack(
           children: <Widget>[
@@ -376,7 +377,7 @@ class _HotelDetailPageState extends State<HotelDetailPage> {
             //Scaffold(body: Container(child: Text('title'))),
           ],
         ),
-      );
+      ));
 }
 
 class HotelFeedBodyBackground extends StatelessWidget {

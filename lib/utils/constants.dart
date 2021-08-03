@@ -3,8 +3,11 @@ class Constants {
   static const String LOGIN_URL = "$API_URL/login";
   static const String REGISTER_URL = "$API_URL/register";
   static const String PROPERTIES_URL = "$API_URL/properties";
+  static const String PROPERTIES_CLOSEST_URL = "$API_URL/properties/closest";
   static const String POPULAR_PROPERTIES_URL = "$API_URL/properties/popular";
   static const String SHOW_PROPERTY_URL = "$API_URL/property";
+  static const String SEARCH_URL = "$API_URL/property/city";
+  static const String ADD_BOOKING = "$API_URL/user/booking";
 }
 
 class Menu {

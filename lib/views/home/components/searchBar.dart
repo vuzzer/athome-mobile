@@ -1,6 +1,8 @@
 import 'package:book_medial_mobile/utils/AppColors.dart';
 import 'package:book_medial_mobile/utils/AppConstant.dart';
-import 'package:flutter/material.dart'; 
+import 'package:book_medial_mobile/utils/screen_arguments.dart';
+import 'package:book_medial_mobile/views/search_results/search_results.dart';
+import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:simple_moment/simple_moment.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -236,7 +238,16 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                             Navigator.pushNamed(
+                              context,
+                              SearchResultView.routeName,
+                              arguments: ScreenArguments(
+                                destination: this.destination,
+                              ),
+                            );
+                            // Navigator.pushNamed(context, "/page_search_results");
+                          },
                         ),
                       ),
                     ],
@@ -244,8 +255,7 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
                 )),
           )
         : Container(
-            margin: EdgeInsets.only(
-                left:0, right: 0, top: 10.0, bottom: 10.0),
+            margin: EdgeInsets.only(left: 0, right: 0, top: 10.0, bottom: 10.0),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             width: width,
             height: height * .12,
@@ -380,4 +390,3 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
 
 //fin
 }
- 

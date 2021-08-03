@@ -1,17 +1,34 @@
+import 'package:book_medial_mobile/api/models/property.dart';
+import 'package:book_medial_mobile/api/providers/booking_provider.dart';
+import 'package:book_medial_mobile/utils/functions.dart';
 import 'package:book_medial_mobile/utils/my_custom_app_bar.dart';
-import 'package:book_medial_mobile/views/free_properties/components/free_property_card.dart';
+import 'package:book_medial_mobile/utils/screen_arguments.dart';
+import 'package:book_medial_mobile/views/closest_properties/components/property_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ReservationDetailsView extends StatefulWidget {
-  ReservationDetailsView({Key key}) : super(key: key);
+  ReservationDetailsView({Key key, Property property}) : super(key: key);
+  static final String routeName = '/page_reservation_details';
 
   @override
   _ReservationDetailsViewState createState() => _ReservationDetailsViewState();
 }
 
 class _ReservationDetailsViewState extends State<ReservationDetailsView> {
+  TextEditingController usernameTextController =
+      TextEditingController(text: "");
+  String sejourType = "",
+      startDate = "",
+      endDate = "",
+      startTime = "",
+      endTime = '';
+  bool isCreatingReservation = false;
+  var args;
+
   @override
   Widget build(BuildContext context) {
+    args = ModalRoute.of(context).settings.arguments as ScreenArguments;
     Size screenSize = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
@@ -49,8 +66,9 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                 SizedBox(
                   height: 10,
                 ),
-                FreePropertyCardComponent(
+                PropertyCardComponent(
                   isShowButton: false,
+                  property: args.property,
                 ),
                 SizedBox(height: 40),
                 ////////formulaire
@@ -87,7 +105,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                           ),
                         ),
                         child: TextField(
-                          // controller: loginTextController,
+                          controller: this.usernameTextController,
                           autocorrect: true,
                           onChanged: (String value) {
                             setState(() {
@@ -168,7 +186,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                             );
                           }).toList(),
                           onChanged: (String value) {
-                            // this.company = value;
+                            this.sejourType = value;
                             // _bottomSheetController.close();
                           },
                         ),
@@ -204,7 +222,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                             ),
                             SizedBox(height: 20),
                             Text(
-                              'A partir de ',
+                              'Choisir une date',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: "Montserrat",
@@ -224,6 +242,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                               ),
                               child: TextField(
                                 decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.calendar_today),
                                   hintText: "",
                                   hintStyle: TextStyle(
                                     fontSize: 16,
@@ -318,7 +337,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                                             );
                                           }).toList(),
                                           onChanged: (String value) {
-                                            // this.company = value;
+                                            this.startTime = value;
                                             // _bottomSheetController.close();
                                           },
                                         ),
@@ -336,7 +355,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'A partir de ',
+                                        "Jusqu'à ",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontFamily: "Montserrat",
@@ -378,7 +397,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                                             );
                                           }).toList(),
                                           onChanged: (String value) {
-                                            // this.company = value;
+                                            this.endTime = value;
                                             // _bottomSheetController.close();
                                           },
                                         ),
@@ -392,13 +411,13 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                         ),
                       ),
 
-                      //Bouton de connexion
+                      //Bouton de création réservation
                       Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(height: 25),
-                            //Bouton de connexion
+                            //Bouton de création réservation
                             Container(
                               constraints: BoxConstraints(
                                 minWidth: screenSize.width,
@@ -410,11 +429,12 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                                   Radius.elliptical(10, 10),
                                 ),
                               ),
-                              child: true
+                              child: !this.isCreatingReservation
                                   // ignore: deprecated_member_use
                                   ? RaisedButton(
                                       onPressed: () {
-                                        // this._attemptLogin();
+                                        this.createReservation();
+
                                         //Navigator.pushNamed(context, '/page_home');
                                       },
                                       shape: RoundedRectangleBorder(
@@ -479,5 +499,36 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
         ),
       ),
     );
+  }
+
+  createReservation() {
+    if (this.usernameTextController.text != null &&
+        this.sejourType != null &&
+        this.startDate != null &&
+        this.endDate != null &&
+        this.startTime != null &&
+        this.endTime != null) {
+      BookingProvider bookingProvider =
+          Provider.of<BookingProvider>(context, listen: false);
+
+      bookingProvider
+          .createBooking(
+        this.args.property.id,
+        this.sejourType,
+        this.startDate,
+        this.endDate,
+        this.startTime,
+        this.endTime,
+      )
+          .then((result) {
+        if (result) {
+          showSnackbar(context, "Réservation créée avec succès !");
+        } else {
+          showSnackbar(context, "Quelque chose s'est mal passée, veuillez réessayer !");
+        }
+      });
+    } else {
+      //Messages d'erreur
+    }
   }
 }

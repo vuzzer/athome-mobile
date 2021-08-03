@@ -1,21 +1,25 @@
+
 import 'package:book_medial_mobile/utils/my_custom_app_bar.dart';
-import 'package:book_medial_mobile/views/free_properties/components/free_property_card.dart';
+import 'package:book_medial_mobile/utils/screen_arguments.dart';
+import 'package:book_medial_mobile/views/closest_properties/components/list_card_properties.dart';
 import 'package:book_medial_mobile/views/home/components/searchBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class FreePropertiesView extends StatefulWidget {
-  FreePropertiesView({Key key}) : super(key: key);
+class SearchResultView extends StatefulWidget {
+  SearchResultView({Key key}) : super(key: key);
+
+  static const routeName = '/page_search_results';
 
   @override
-  _FreePropertiesViewState createState() => _FreePropertiesViewState();
+  _ClosestPropertiesViewState createState() => _ClosestPropertiesViewState();
 }
 
-class _FreePropertiesViewState extends State<FreePropertiesView> { 
-  
+class _ClosestPropertiesViewState extends State<SearchResultView> {
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context).settings.arguments as ScreenArguments; 
     Size screenSize = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
@@ -25,15 +29,15 @@ class _FreePropertiesViewState extends State<FreePropertiesView> {
       child: Scaffold(
         appBar: MyCustomAppBar(
           [
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, "/page_home");
-              },
-              child: Icon(
-                Icons.close,
-                size: 30,
-              ),
-            ),
+            //   GestureDetector(
+            //     onTap: () {
+            //       Navigator.pushNamed(context, "/page_home");
+            //     },
+            //     child: Icon(
+            //       Icons.close,
+            //       size: 30,
+            //     ),
+            //   ),
           ],
           preferredHeight: screenSize.height * .04,
         ),
@@ -53,32 +57,51 @@ class _FreePropertiesViewState extends State<FreePropertiesView> {
                 /////Bar de recherche
                 SearchBarComponent(),
                 SizedBox(
+                  height: 40,
+                ),
+                //////////Retour
+                Container(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/page_home");
+                    },
+                    child: Row(
+                      children: [
+                        Icon(FontAwesomeIcons.longArrowAltLeft),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Retour',
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
                   height: screenSize.height * .04,
                 ),
                 //////////Disponibilité selon la période choisie
                 Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 20,
+                    horizontal: 0,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Disponibilité selon la période",
+                        "Disponibilité : ${args.destination}",
                         style: TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: 28,
                           fontWeight: FontWeight.w800,
                         ),
-                      ),
-                      Text(
-                        "choisie",
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 28,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
+                      ), 
                     ],
                   ),
                 ),
@@ -106,17 +129,12 @@ class _FreePropertiesViewState extends State<FreePropertiesView> {
                   ],
                 ),
                 SizedBox(height: screenSize.height * .03),
-                /////////////Card
-                FreePropertyCardComponent(),
-                SizedBox(
-                  height: 20,
-                ),
-                FreePropertyCardComponent(),
+                /////////////List Card
+                listPropertyComponent(role: "closest_properties")
               ],
             ),
           ),
         ),
-        //bottomNavigationBar: _buildBottomNavigation(context),
       ),
     );
   }

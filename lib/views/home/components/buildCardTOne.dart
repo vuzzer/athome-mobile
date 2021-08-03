@@ -1,13 +1,13 @@
-import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
+// import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
 import 'package:book_medial_mobile/utils/AppColors.dart';
 import 'package:book_medial_mobile/utils/AppConstant.dart';
 import 'package:book_medial_mobile/views/home/components/gradient.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 Widget buildCardOne(
     context, double height, double width, String urlImage, String titleButton) {
-  var proximity = Provider.of<ProximityProvider>(context, listen: false);
+  // var proximity = Provider.of<ProximityProvider>(context, listen: false);
   return Container(
     height: height * 0.17,
     child: Stack(
@@ -135,9 +135,9 @@ Widget buildCardOne(
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, '/page_free_properties');
-                    proximity.change();
-                    print(proximity.proximity);
+                    Navigator.pushNamed(context, '/page_closest_properties');
+                    // proximity.change();
+                    // print(proximity.proximity);
                   },
                 ),
               ),

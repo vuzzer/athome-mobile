@@ -28,7 +28,11 @@ class _RegisterViewState extends State<RegisterView> {
           ),
           Row(
             children: [
-              Text('Déjà inscrit ?'),
+              Text('Déjà inscrit ?',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: "Montserrat",
+                  )),
               GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, "/page_login");

@@ -1,11 +1,9 @@
 import 'package:book_medial_mobile/api/providers/auth_provider.dart';
 import 'package:book_medial_mobile/api/providers/property_provider.dart';
-import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
 import 'package:book_medial_mobile/utils/AppColors.dart';
 import 'package:book_medial_mobile/utils/AppConstant.dart';
 import 'package:book_medial_mobile/utils/my_custom_app_bar.dart';
 import 'package:book_medial_mobile/utils/my_custom_dialog_box.dart';
-import 'package:book_medial_mobile/views/free_properties/properties.dart';
 import 'package:book_medial_mobile/views/home/components/buildCardTOne.dart';
 import 'package:book_medial_mobile/views/home/components/buildCardThird.dart';
 import 'package:book_medial_mobile/views/home/components/buildCardTwo.dart';
@@ -40,7 +38,7 @@ class WidgetHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authprovider = Provider.of<AuthProvider>(context, listen: false);
-    var proximities = Provider.of<ProximityProvider>(context);
+    // var proximities = Provider.of<ProximityProvider>(context);
     var propertyProvider =
         Provider.of<PropertyProvider>(context, listen: false);
     propertyProvider.getPopularProperties();
@@ -50,8 +48,6 @@ class WidgetHome extends StatelessWidget {
         //////////////////////////////////////////Search bar
         // searchBar(MediaQuery.of(context).size.width),
         SearchBarComponent(),
-
-        //User click on proximity we have special card.
 
         /////////////////////////////////////////Recherches récentes
         if (authprovider.isConnected)
@@ -101,7 +97,7 @@ class WidgetHome extends StatelessWidget {
                             .map((popularProperty) {
                           return Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                                const EdgeInsets.symmetric(horizontal: 1.0),
                             child: hotelCard(
                               context,
                               menu[0].urlImage,
@@ -176,7 +172,7 @@ class WidgetHome extends StatelessWidget {
                             .map((popularProperty) {
                           return Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                                const EdgeInsets.symmetric(horizontal: 1.0),
                             child: hotelCard(context, menu[0].urlImage,
                                 "$popularProperty", 4,
                                 width: screenSize.width * .7),
@@ -332,13 +328,14 @@ class WidgetHome extends StatelessWidget {
           preferredHeight: 80,
         ),
         body: Container(
-            padding: EdgeInsets.only(
-              left: 0,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: proximities.proximity ? PropertiesView() : withoutProximity),
+          padding: EdgeInsets.only(
+            left: 0,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: withoutProximity,
+        ),
       ),
     );
   }

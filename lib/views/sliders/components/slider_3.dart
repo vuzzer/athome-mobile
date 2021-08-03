@@ -52,7 +52,7 @@ class Slider3Component extends StatelessWidget {
                     SharedPreferences _prefs =
                         await SharedPreferences.getInstance();
                     _prefs.setBool("isConnected", false);
-                    Navigator.pushNamed(context, '/page_home');
+                    Navigator.pushNamed(context, '/page_login');
                   },
                   child: Text(
                     'Démarrer',

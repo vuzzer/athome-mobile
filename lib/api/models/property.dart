@@ -28,14 +28,12 @@ class Property {
     if (json['facilities'] != null && json['facilities'].isNotEmpty) {
       json['facilities'].forEach((facility) {
         facilities.add(facility['name'].split(' ')[0]);
-        // print(facility['name'].split(' ')[0]);
       });
     }
 
     if (json['bed_room'] != null && json['bed_room'].isNotEmpty) {
       json['bed_room'].forEach((bedrooms) {
         bedrooms['beds'].forEach((bed) {
-          // print(bed['type']);
           this.beds.add(bed['type']);
         });
       });
@@ -43,5 +41,13 @@ class Property {
     //
   }
 
+  Property.smallProperty(
+      {String name, List facilities, List beds, int dayPrice, int nightPrice}) {
+    this.name = name;
+    this.facilities = facilities;
+    this.beds = beds;
+    this.dayPrice = dayPrice;
+    this.nightPrice = nightPrice;
+  }
   //
 }

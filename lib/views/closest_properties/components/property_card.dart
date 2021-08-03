@@ -1,21 +1,17 @@
+import 'package:book_medial_mobile/api/models/property.dart';
 import 'package:book_medial_mobile/utils/functions.dart';
+import 'package:book_medial_mobile/utils/screen_arguments.dart';
 import 'package:flutter/material.dart';
 
-class FreePropertyCardComponent extends StatelessWidget {
-  final bool isShowButton;
-  final String name;
-  final List facilities, beds;
-  final int dayPrice, nightPrice;
+class PropertyCardComponent extends StatelessWidget {
+  final bool isShowButton; 
+  final Property property;
 
-  const FreePropertyCardComponent(
-      {Key key,
-      this.isShowButton = true,
-      this.name,
-      this.facilities,
-      this.beds,
-      this.dayPrice,
-      this.nightPrice})
-      : super(key: key);
+  const PropertyCardComponent({
+    Key key,
+    this.isShowButton = true,
+    this.property,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,6 @@ class FreePropertyCardComponent extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           margin: EdgeInsets.symmetric(vertical: 10),
-
           child: Column(
             children: [
               /////////Nom de la propriété
@@ -49,7 +44,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${this.name}',
+                      '${this.property.name}',
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontWeight: FontWeight.w800,
@@ -85,8 +80,8 @@ class FreePropertyCardComponent extends StatelessWidget {
                         ),
                         Text(
                           truncateText(
-                            this.facilities.length > 0
-                                ? this.facilities.join(" - ")
+                            this.property.facilities.length > 0
+                                ? this.property.facilities.join(" - ")
                                 : "null",
                             36,
                           ),
@@ -109,8 +104,8 @@ class FreePropertyCardComponent extends StatelessWidget {
                         ),
                         Text(
                           truncateText(
-                            this.beds.length > 0
-                                ? this.beds.join(" - ")
+                            this.property.beds.length > 0
+                                ? this.property.beds.join(" - ")
                                 : "null",
                             36,
                           ),
@@ -168,7 +163,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          '${this.nightPrice} Fcfa',
+                          '${this.property.nightPrice} Fcfa',
                           style: TextStyle(
                             color: Color(0xFFFBBB00),
                             fontFamily: "Montserrat",
@@ -190,7 +185,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          '${this.dayPrice} Fcfa',
+                          '${this.property.dayPrice} Fcfa',
                           style: TextStyle(
                             color: Color(0xFFFBBB00),
                             fontFamily: "Montserrat",
@@ -221,7 +216,12 @@ class FreePropertyCardComponent extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(
-                              context, '/page_reservation_details');
+                            context,
+                            '/page_reservation_details',
+                            arguments: ScreenArguments(
+                              property: property
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -258,7 +258,7 @@ class FreePropertyCardComponent extends StatelessWidget {
                         ),
                       ),
                     )
-                  : SizedBox(), 
+                  : SizedBox(),
             ],
           ),
         ),

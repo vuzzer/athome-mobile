@@ -1,7 +1,8 @@
-import 'package:book_medial_mobile/views/forgot_password/verification_code.dart';
-import 'package:book_medial_mobile/views/free_properties/free_properties_view.dart';
+import 'package:book_medial_mobile/views/closest_properties/closest_properties_view.dart';
+import 'package:book_medial_mobile/views/forgot_password/verification_code.dart'; 
 import 'package:book_medial_mobile/views/hotel_detail/hotel_detail.dart';
 import 'package:book_medial_mobile/views/reservation_details/reservation_details_view.dart';
+import 'package:book_medial_mobile/views/search_results/search_results.dart';
 import 'package:book_medial_mobile/views/splash_screen.dart';
 import 'package:book_medial_mobile/widgets/widgets_account.dart';
 import 'package:book_medial_mobile/widgets/setting_account.dart';
@@ -25,8 +26,9 @@ final routes = {
   '/page_hotel_detail': (BuildContext context) => HotelDetailPage(),
   '/page_new_password': (BuildContext context) => NewPasswordView(),
   '/page_verification_code': (BuildContext context) => VerificationCodeView(),
-  '/page_free_properties': (BuildContext context) => FreePropertiesView(),
-  '/page_reservation_details': (BuildContext context) => ReservationDetailsView(),
+  '/page_closest_properties': (BuildContext context) => ClosestPropertiesView(),
+  SearchResultView.routeName: (BuildContext context) => SearchResultView(), 
+  ReservationDetailsView.routeName: (BuildContext context) => ReservationDetailsView(),
   '/': (BuildContext context) => MySplashScreen(), 
 
 };
