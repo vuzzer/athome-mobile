@@ -28,7 +28,7 @@ class _PersonnalDataViewState extends State<PersonnalDataView> {
     Size screenSize = MediaQuery.of(context).size;
     AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
-    authProvider.setUserProfileInfo();
+    authProvider.getUserProfile();
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushNamed(context, "/page_account");
@@ -96,7 +96,7 @@ class _PersonnalDataViewState extends State<PersonnalDataView> {
                             autocorrect: true,
                             onChanged: (String value) {},
                             decoration: InputDecoration(
-                                hintText: authProvider.user.name ?? "DIEKE",
+                                hintText: authProvider.user.name ?? " ",
                                 hintStyle: TextStyle(
                                     fontSize: 18,
                                     fontFamily: "Montserrat",
@@ -142,7 +142,7 @@ class _PersonnalDataViewState extends State<PersonnalDataView> {
                             autocorrect: true,
                             onChanged: (String value) {},
                             decoration: InputDecoration(
-                                hintText: "Jonathan",
+                                hintText: "",
                                 hintStyle: TextStyle(
                                     fontSize: 18,
                                     fontFamily: "Montserrat",
@@ -188,7 +188,7 @@ class _PersonnalDataViewState extends State<PersonnalDataView> {
                             autocorrect: true,
                             onChanged: (String value) {},
                             decoration: InputDecoration(
-                                hintText: authProvider.user.name ?? "Jojo225",
+                                hintText: authProvider.user.name ?? " ",
                                 hintStyle: TextStyle(
                                     fontSize: 18,
                                     fontFamily: "Montserrat",
@@ -235,7 +235,7 @@ class _PersonnalDataViewState extends State<PersonnalDataView> {
                             onChanged: (String value) {},
                             decoration: InputDecoration(
                                 hintText: authProvider.user.email ??
-                                    "jonathan.dieke225@gmail.com",
+                                    " ",
                                 hintStyle: TextStyle(
                                     fontSize: 18,
                                     fontFamily: "Montserrat",

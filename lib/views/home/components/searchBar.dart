@@ -325,7 +325,7 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
           );
   }
 
-  Widget showDateCustomDialog(BuildContext contexte) {
+  Widget showDateCustomDialog(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),

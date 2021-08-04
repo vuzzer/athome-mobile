@@ -6,6 +6,9 @@ import 'package:book_medial_mobile/utils/screen_arguments.dart';
 import 'package:book_medial_mobile/views/closest_properties/components/property_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_moment/simple_moment.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+// import 'package:intl/date_symbol_data_local.dart';
 
 class ReservationDetailsView extends StatefulWidget {
   ReservationDetailsView({Key key, Property property}) : super(key: key);
@@ -18,11 +21,11 @@ class ReservationDetailsView extends StatefulWidget {
 class _ReservationDetailsViewState extends State<ReservationDetailsView> {
   TextEditingController usernameTextController =
       TextEditingController(text: "");
-  String sejourType = "",
+  String sejourType = "Court séjour",
       startDate = "",
       endDate = "",
-      startTime = "",
-      endTime = '';
+      startTime = "13h",
+      endTime = '13h';
   bool isCreatingReservation = false;
   var args;
 
@@ -113,9 +116,10 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                             });
                           },
                           onTap: () {
-                            setState(() {
-                              // isErrorLoginTextField = !isErrorLoginTextField;
-                            });
+                            // setState(() {
+                            //   // isErrorLoginTextField = !isErrorLoginTextField;
+                            // });
+                            this.showDateCustomDialog(context);
                           },
                           decoration: InputDecoration(
                             hintText: "",
@@ -168,17 +172,17 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                         child: DropdownButton<String>(
                           isExpanded: true,
                           hint: Text(
-                            'type1',
+                            this.sejourType,
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.white,
+                              color: Colors.black,
                               fontFamily: "IBMPlexSans",
                             ),
                           ),
                           // value: this.company,
                           elevation: 5,
                           style: TextStyle(color: Colors.black),
-                          items: ["type1", "type2"]
+                          items: ["Court séjour", "Long séjour"]
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -186,7 +190,9 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                             );
                           }).toList(),
                           onChanged: (String value) {
-                            this.sejourType = value;
+                            setState(() {
+                              this.sejourType = value;
+                            });
                             // _bottomSheetController.close();
                           },
                         ),
@@ -222,7 +228,7 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                             ),
                             SizedBox(height: 20),
                             Text(
-                              'Choisir une date',
+                              'Choisir un intervalle de date',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: "Montserrat",
@@ -230,27 +236,38 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                               ),
                             ),
                             // Champ
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.elliptical(13, 13)),
-                                border: Border.all(
-                                  color: Colors.grey.shade300,
-                                  style: BorderStyle.solid,
-                                ),
-                              ),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.calendar_today),
-                                  hintText: "",
-                                  hintStyle: TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: "Montserrat",
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return showDateCustomDialog(context);
+                                    });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                      Radius.elliptical(13, 13)),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                    style: BorderStyle.solid,
                                   ),
-                                  border: InputBorder.none,
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 10),
+                                ),
+                                child: TextField(
+                                  enabled: false,
+                                  decoration: InputDecoration(
+                                    prefix: Icon(Icons.calendar_today),
+                                    hintText:
+                                        "${this.startDate} - ${this.endDate}",
+                                    hintStyle: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: "Montserrat",
+                                    ),
+                                    border: InputBorder.none,
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                  ),
                                 ),
                               ),
                             ),
@@ -318,26 +335,38 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                                         child: DropdownButton<String>(
                                           isExpanded: true,
                                           hint: Text(
-                                            '8h',
+                                            this.startTime,
                                             style: TextStyle(
                                               fontSize: 16,
-                                              color: Colors.white,
+                                              color: Colors.black,
                                               fontFamily: "IBMPlexSans",
                                             ),
                                           ),
                                           // value: this.company,
                                           elevation: 5,
                                           style: TextStyle(color: Colors.black),
-                                          items: ["8h", "9h", "10h", "11h"]
-                                              .map<DropdownMenuItem<String>>(
-                                                  (String value) {
+                                          items: [
+                                            "8h",
+                                            "9h",
+                                            "10h",
+                                            "11h",
+                                            "12h",
+                                            "13h",
+                                            "14h",
+                                            "15h",
+                                            "16h",
+                                            "17h"
+                                          ].map<DropdownMenuItem<String>>(
+                                              (String value) {
                                             return DropdownMenuItem<String>(
                                               value: value,
                                               child: Text(value),
                                             );
                                           }).toList(),
                                           onChanged: (String value) {
-                                            this.startTime = value;
+                                            setState(() {
+                                              this.startTime = value;
+                                            });
                                             // _bottomSheetController.close();
                                           },
                                         ),
@@ -378,26 +407,38 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
                                         child: DropdownButton<String>(
                                           isExpanded: true,
                                           hint: Text(
-                                            '8h',
+                                            this.endTime,
                                             style: TextStyle(
                                               fontSize: 16,
-                                              color: Colors.white,
+                                              color: Colors.black,
                                               fontFamily: "IBMPlexSans",
                                             ),
                                           ),
                                           // value: this.company,
                                           elevation: 5,
                                           style: TextStyle(color: Colors.black),
-                                          items: ["8h", "9h", "10h", "11h"]
-                                              .map<DropdownMenuItem<String>>(
-                                                  (String value) {
+                                          items: [
+                                            "8h",
+                                            "9h",
+                                            "10h",
+                                            "11h",
+                                            "12h",
+                                            "13h",
+                                            "14h",
+                                            "15h",
+                                            "16h",
+                                            "17h"
+                                          ].map<DropdownMenuItem<String>>(
+                                              (String value) {
                                             return DropdownMenuItem<String>(
                                               value: value,
                                               child: Text(value),
                                             );
                                           }).toList(),
                                           onChanged: (String value) {
-                                            this.endTime = value;
+                                            setState(() {
+                                              this.endTime = value;
+                                            });
                                             // _bottomSheetController.close();
                                           },
                                         ),
@@ -508,12 +549,15 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
         this.endDate != null &&
         this.startTime != null &&
         this.endTime != null) {
+      setState(() {
+        this.isCreatingReservation = true;
+      });
       BookingProvider bookingProvider =
           Provider.of<BookingProvider>(context, listen: false);
 
       bookingProvider
           .createBooking(
-        this.args.property.id,
+        this.args.property.id.toString(),
         this.sejourType,
         this.startDate,
         this.endDate,
@@ -521,14 +565,81 @@ class _ReservationDetailsViewState extends State<ReservationDetailsView> {
         this.endTime,
       )
           .then((result) {
+        setState(() {
+          this.isCreatingReservation = false;
+        });
         if (result) {
           showSnackbar(context, "Réservation créée avec succès !");
         } else {
-          showSnackbar(context, "Quelque chose s'est mal passée, veuillez réessayer !");
+          showSnackbar(
+              context, "Quelque chose s'est mal passée, veuillez réessayer !");
         }
       });
     } else {
       //Messages d'erreur
     }
+  }
+
+  Widget showDateCustomDialog(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(
+              left: 5,
+              top: 5,
+              right: 5,
+            ),
+            margin: EdgeInsets.only(top: 45),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+              ],
+            ),
+            child: SfDateRangePicker(
+              view: DateRangePickerView.month,
+              selectionColor: Color(0xFFF46500),
+              // enableMultiView: true,
+              selectionMode: DateRangePickerSelectionMode.range,
+              rangeSelectionColor: Color(0xFFF46500).withOpacity(0.3),
+              startRangeSelectionColor: Color(0xFFF46500),
+              endRangeSelectionColor: Color(0xFFF46500),
+              monthViewSettings: DateRangePickerMonthViewSettings(
+                firstDayOfWeek: 1,
+              ),
+              toggleDaySelection: true,
+              showActionButtons: true,
+              onSubmit: (calendarDate) async {
+                if (calendarDate is PickerDateRange) {
+                  var moment = Moment.fromDate(calendarDate.startDate); // 
+                  // moment.locale(LocaleFr(), useInFormat: true);
+                  // await initializeDateFormatting(
+                  //     moment.usedLocale.localeString);
+                  setState(() {
+                    startDate = moment.format("dd/MM/yyyy");
+                    moment = Moment.fromDate(calendarDate.endDate);
+                    // moment.locale(LocaleFr(), useInFormat: true);
+                    endDate = moment.format("dd/MM/yyyy");
+                  });
+                }
+                Navigator.pop(context);
+              },
+              onCancel: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

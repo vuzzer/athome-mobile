@@ -7,7 +7,10 @@ class Constants {
   static const String POPULAR_PROPERTIES_URL = "$API_URL/properties/popular";
   static const String SHOW_PROPERTY_URL = "$API_URL/property";
   static const String SEARCH_URL = "$API_URL/property/city";
-  static const String ADD_BOOKING = "$API_URL/user/booking";
+  static const String BOOKINGS_URL = "$API_URL/user/bookings";
+  static const String ADD_BOOKING_URL = "$API_URL/booking";
+  static const String UPDATE_USER_PROFILE_URL = "$API_URL/profile/update";
+  static const String GET_USER_PROFILE_URL = "$API_URL/profile";
 }
 
 class Menu {

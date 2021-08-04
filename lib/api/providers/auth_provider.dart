@@ -116,5 +116,44 @@ class AuthProvider extends ChangeNotifier {
     _prefs.setString('token', token);
   }
 
+  getUserProfile() async {
+    var responseAPI = await http.get(
+      Uri.parse(Constants.GET_USER_PROFILE_URL),
+      headers: {
+        "Accept": "application/json",
+      },
+    );
+
+    if (responseAPI.statusCode == 200) {
+      var data = json.decode(responseAPI.body)["user"];
+      user = User.fromJson(data["user"]);
+
+      notifyListeners();
+    }
+
+    // FIN
+  }
+
+  updateUserProfile(String name) async {
+    var responseAPI = await http.post(
+      Uri.parse(Constants.UPDATE_USER_PROFILE_URL),
+      body: {"name": name, "user_id": user.id},
+      headers: {
+        "Accept": "application/json",
+      },
+    );
+
+    if (responseAPI.statusCode == 200) {
+      var data = json.decode(responseAPI.body);
+      user = User.fromJson(data["user"]);
+
+      setSession(user, data['token']);
+
+      notifyListeners();
+    }
+
+    //fin
+  }
+
   //fin
 }

@@ -7,8 +7,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class AccountView extends StatelessWidget {
-  const AccountView({Key key}) : super(key: key);
+class AccountView extends StatefulWidget {
+  AccountView({Key key}) : super(key: key);
+
+  @override
+  _AccountViewState createState() => _AccountViewState();
+}
+
+class _AccountViewState extends State<AccountView> {
+  bool isLoggingOut = false;
 
   @override
   Widget build(BuildContext context) {
@@ -246,33 +253,53 @@ class AccountView extends StatelessWidget {
                     builder:
                         (context, AuthProvider authProvider, Widget child) {
                       return authProvider.isConnected
-                          ? GestureDetector(
-                              onTap: () { 
-                                authProvider.unsetSession();
-                                var selectPageProvider =
-                                    Provider.of<SelectPageProvider>(context,
-                                        listen: false);
-                                selectPageProvider.changePage(0);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomePage()),
-                                );
-                              },
-                              child: Container(
-                                width: 150,
-                                height: 150,
-                                child: Text(
-                                  'Se déconnecter',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: "Montserrat",
-                                    color: Color(0xFFF46500),
+                          ? (!this.isLoggingOut
+                              ? GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      this.isLoggingOut = true;
+                                    });
+                                    authProvider.unsetSession().then((value) {
+                                      var selectPageProvider =
+                                          Provider.of<SelectPageProvider>(
+                                              context,
+                                              listen: false);
+                                      setState(() {
+                                        this.isLoggingOut = false;
+                                      });
+                                      selectPageProvider.changePage(0);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage()),
+                                      );
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 150,
+                                    height: 150,
+                                    child: Text(
+                                      'Se déconnecter',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: "Montserrat",
+                                        color: Color(0xFFF46500),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )
+                                )
+                              : Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                  ),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 5,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Color(0xFFF46500),
+                                    ),
+                                  ),
+                                ))
                           : SizedBox();
                     },
                   ),

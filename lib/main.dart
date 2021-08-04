@@ -1,4 +1,5 @@
 import 'package:book_medial_mobile/api/providers/auth_provider.dart';
+import 'package:book_medial_mobile/api/providers/booking_provider.dart';
 import 'package:book_medial_mobile/api/providers/property_provider.dart';
 import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
 import 'package:book_medial_mobile/api/providers/select_page.dart';
@@ -20,10 +21,13 @@ class MyApp extends StatelessWidget {
             return AuthProvider();
           }),
           ChangeNotifierProvider(create: (context) {
-            return SelectPageProvider();
+            return PropertyProvider();
           }),
           ChangeNotifierProvider(create: (context) {
-            return PropertyProvider();
+            return BookingProvider();
+          }),
+          ChangeNotifierProvider(create: (context) {
+            return SelectPageProvider();
           }),
           ChangeNotifierProvider(create: (context) {
             return ProximityProvider();
@@ -34,8 +38,8 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData( 
-            primarySwatch: Colors.blue, 
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
           //home: HomePage(),

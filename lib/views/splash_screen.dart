@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:book_medial_mobile/api/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class MySplashScreen extends StatefulWidget {
   MySplashScreen({Key key}) : super(key: key);
@@ -33,21 +34,25 @@ class _MySplashScreenState extends State<MySplashScreen>
         Provider.of<AuthProvider>(context, listen: false);
 
     authProvider.getUserStatus().then((String navigation) {
-      if (navigation == "page_slides") {
-        Timer(Duration(milliseconds: 3600), () {
-          Navigator.pushReplacementNamed(context, "/$navigation");
-        });
-      }
-      if (navigation == "page_login") {
-        Timer(Duration(milliseconds: 3600), () {
-          Navigator.pushReplacementNamed(context, "/$navigation");
-        });
-      }
-      if (navigation == "page_home") {
-        Timer(Duration(milliseconds: 3600), () {
-          Navigator.pushReplacementNamed(context, "/$navigation");
-        });
-      }
+      // if (DateTime.now().isBefore(DateTime(2021, 9))) {
+        if (navigation == "page_slides") {
+          Timer(Duration(milliseconds: 3600), () {
+            Navigator.pushReplacementNamed(context, "/$navigation");
+          });
+        }
+        if (navigation == "page_login") {
+          Timer(Duration(milliseconds: 3600), () {
+            Navigator.pushReplacementNamed(context, "/$navigation");
+          });
+        }
+        if (navigation == "page_home") {
+          Timer(Duration(milliseconds: 3600), () {
+            Navigator.pushReplacementNamed(context, "/$navigation");
+          });
+        }
+      // } else {
+      //   Navigator.pushReplacementNamed(context, "/navigation");
+      // }
     });
   }
 
