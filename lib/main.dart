@@ -1,18 +1,28 @@
-import 'package:book_medial_mobile/api/providers/auth_provider.dart';
-import 'package:book_medial_mobile/api/providers/booking_provider.dart';
-import 'package:book_medial_mobile/api/providers/property_provider.dart';
-import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
-import 'package:book_medial_mobile/api/providers/select_page.dart';
+import 'package:book_medial_mobile/constant/AppConstant.dart';
+import 'package:book_medial_mobile/providers/auth_provider.dart';
+import 'package:book_medial_mobile/providers/booking_provider.dart';
+import 'package:book_medial_mobile/providers/facebook_sign_in.dart';
+import 'package:book_medial_mobile/providers/google_sign_in.dart';
+import 'package:book_medial_mobile/providers/property_provider.dart';
+import 'package:book_medial_mobile/providers/proximite_provider.dart';
+import 'package:book_medial_mobile/providers/select_page.dart';
 import 'package:flutter/material.dart';
-import 'package:book_medial_mobile/utils/routes.dart';
+import 'package:book_medial_mobile/routes/routes.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+Future main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,17 +44,26 @@ class MyApp extends StatelessWidget {
           }),
           ChangeNotifierProvider(create: (context) {
             return SliderProvider();
+          }),
+          ChangeNotifierProvider(create: (context) {
+            return GoogleSignInProvider();
+          }),
+          ChangeNotifierProvider(create: (context) {
+            return FacebookSignInProvider();
           })
         ],
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Home',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+              primarySwatch: Colors.blue,
+              fontFamily: fontHubballi,
+              textTheme: TextTheme(
+                  titleSmall: TextStyle(fontSize: textSizeSmall),
+                  labelMedium: TextStyle(
+                    fontSize: textSizeMedium,
+                    fontWeight: FontWeight.w700,
+                  ))),
           debugShowCheckedModeBanner: false,
-          //home: HomePage(),
-          // initialRoute: '/page_home',
-          // home: MySplashScreen(),
           routes: routes,
         ));
   }

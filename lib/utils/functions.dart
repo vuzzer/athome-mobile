@@ -29,4 +29,3 @@ String truncateText(String text, int maxLength) {
       ? text
       : "${text.substring(0, (maxLength - 1))}...";
 }
-

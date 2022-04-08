@@ -13,7 +13,7 @@ class RootView extends StatelessWidget {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [ 
+          children: [
             SizedBox(
               height: 100,
             ),

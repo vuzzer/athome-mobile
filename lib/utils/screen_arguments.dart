@@ -1,4 +1,4 @@
-import 'package:book_medial_mobile/api/models/property.dart';
+import 'package:book_medial_mobile/models/property.dart';
 
 class ScreenArguments {
   String destination;

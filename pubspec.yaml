@@ -37,12 +37,24 @@ dependencies:
   http: ^0.13.3
   smooth_page_indicator: ^0.2.3
   pin_code_fields: ^7.3.0
+  firebase_auth: ^1.1.4
+  google_sign_in: ^5.0.3
+  flutter_facebook_auth: '^3.5.0'
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   syncfusion_flutter_datepicker: ^19.2.49
   simple_moment: ^1.1.1
-  # timeago: ^3.1.0
+  firebase_core: ^1.12.0
+  flutter_native_splash: ^2.1.1
+  cloud_firestore: ^3.1.10
+  google_fonts: ^2.3.1
+
+flutter_native_splash:
+  color: "#1360E2"
+  image: assets/icons/athome.png
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:
@@ -83,11 +95,12 @@ flutter:
         - asset: assets/fonts/Montserrat-Bold.ttf
         - asset: assets/fonts/Montserrat-ExtraBold.ttf
         - asset: assets/fonts/Montserrat-Regular.ttf
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+
+    - family: Hubballi
+      fonts:
+        - asset: assets/fonts/Hubballi/Hubballi-Regular.ttf
+          style: normal
+          weight: 700
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'AppColors.dart';
-import 'AppConstant.dart';
+import '../constant/AppColors.dart';
+import '../constant/AppConstant.dart';
 
 /*
 Text headerText(var text) {
@@ -19,7 +19,6 @@ Text headerText(var text) {
     style: TextStyle(fontFamily: fontBold, fontSize: 17.5, color: appTextColorSecondary),
   );
 }*/
-
 
 Widget customDialog(double height, bool isShowDialog) {
   return isShowDialog
@@ -69,7 +68,6 @@ void showCustomDialog(BuildContext context, int position) {
       });
 }
 
-
 Widget text(var text,
     {var fontSize = textSizeLargeMedium,
     textColor = appTextColorSecondary,
@@ -88,7 +86,6 @@ Widget text(var text,
           height: 1.5,
           letterSpacing: latterSpacing));
 }
-
 
 showToast(BuildContext aContext, String caption) {
   SnackBar snackBar = SnackBar(

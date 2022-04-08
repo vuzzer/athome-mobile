@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "804146154459",
+    "project_id": "home-e1d49",
+    "storage_bucket": "home-e1d49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804146154459:android:c5b8fc80bff0d2ece9f5fe",
+        "android_client_info": {
+          "package_name": "com.example.book_medial_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804146154459-lgqj8dbkqvqqbhktfknt4dqgq1io89lu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBosR9E2GpDakMh39CNscp9c0zlIEsfVkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804146154459-lgqj8dbkqvqqbhktfknt4dqgq1io89lu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
