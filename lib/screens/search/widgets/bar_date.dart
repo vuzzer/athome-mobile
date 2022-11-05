@@ -1,6 +1,6 @@
 import 'package:book_medial_mobile/constant/AppColors.dart';
 import 'package:book_medial_mobile/constant/AppConstant.dart';
-import 'package:book_medial_mobile/screens/search/widgets/widgets/show_date_custom.dart';
+import 'package:book_medial_mobile/screens/search/widgets/show_date_custom.dart';
 import 'package:flutter/material.dart';
 
 class BarDate extends StatelessWidget {
@@ -10,7 +10,6 @@ class BarDate extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       return GestureDetector(
         onTap: () {
-          print('tap on date field');
           showDialog(
               context: context,
               builder: (BuildContext context) {

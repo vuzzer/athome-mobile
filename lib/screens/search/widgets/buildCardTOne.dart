@@ -1,7 +1,7 @@
 // import 'package:book_medial_mobile/api/providers/proximite_provider.dart';
 import 'package:book_medial_mobile/constant/AppColors.dart';
 import 'package:book_medial_mobile/constant/AppConstant.dart';
-import 'gradient.dart';
+import '../../../utils/gradient.dart';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 

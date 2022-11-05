@@ -1,23 +1,22 @@
 import 'package:book_medial_mobile/constant/AppColors.dart';
 import 'package:book_medial_mobile/constant/AppConstant.dart';
-import 'package:book_medial_mobile/screens/search_results/search_results.dart';
-import 'package:book_medial_mobile/utils/screen_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'widgets/bar_city.dart';
-import 'widgets/bar_date.dart';
-import 'widgets/bar_room.dart';
+import 'bar_city.dart';
+import 'bar_date.dart';
+import 'bar_room.dart';
 
-class SearchBarComponent extends StatefulWidget {
-  SearchBarComponent({Key key}) : super(key: key);
+class SearchBar extends StatefulWidget {
+  final String destination;
+
+  const SearchBar({Key key, this.destination = ""}) : super(key: key);
 
   @override
-  _SearchBarComponentState createState() => _SearchBarComponentState();
+  _SearchBarState createState() => _SearchBarState();
 }
 
-class _SearchBarComponentState extends State<SearchBarComponent> {
-  String destination = "Abidjan";
+class _SearchBarState extends State<SearchBar> {
   bool isReduceSearchBar = false;
 
   @override
@@ -73,13 +72,6 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        SearchResultView.routeName,
-                        arguments: ScreenArguments(
-                          destination: this.destination,
-                        ),
-                      );
                       // Navigator.pushNamed(context, "/page_search_results");
                     },
                   ),

@@ -4,35 +4,30 @@ import 'package:book_medial_mobile/constant/AppConstant.dart';
 import 'package:book_medial_mobile/constant/constants.dart';
 import 'package:book_medial_mobile/providers/select_page.dart';
 import 'package:book_medial_mobile/widgets/custom_navigation_bar.dart';
-import 'package:book_medial_mobile/screens/profile/widgets_account.dart';
-import 'package:book_medial_mobile/screens/notification/notification_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'search/search_view.dart';
 
-class Home extends StatefulWidget {
+class HomeView extends StatefulWidget {
+  static const String routeName = "/page_home";
   @override
   _HomeState createState() {
     return _HomeState();
   }
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _HomeState extends State<HomeView> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
     _pageController.dispose();
   }
 
   ///This controller can be used to programmatically
   PageController _pageController = PageController(initialPage: 0);
-  TabController _tabController;
-  final List<Widget> pages = [
-    SearchView(),
-    NotificationView(),
-    AccountView(),
-  ];
+
+  final List<Widget> pages = [SearchView(), Container(), Container()];
 
   ///page index
   void navigationTapped(int page) {
@@ -85,6 +80,31 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           children: pages,
           index: selectPageProvider.selectPage,
         ),
-        bottomNavigationBar: _buildBottomNavigation(context));
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search_outlined),
+              label: 'Recherche',
+              activeIcon: Icon(Icons.search),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.card_travel_outlined),
+              label: 'Reservation',
+              activeIcon: Icon(Icons.card_travel),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
+              label: 'Compte',
+              activeIcon: Icon(Icons.account_circle),
+            ),
+          ],
+          onTap: (index) =>
+              setState(() => selectPageProvider.changePage(index)),
+          currentIndex: selectPageProvider.selectPage,
+          selectedItemColor: primaryColor,
+          unselectedItemColor: Palette.inactiveColor,
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+        ));
   }
 }
